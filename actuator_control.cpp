@@ -1,8 +1,8 @@
 // Pin definitions
-const int RELAY_IN3 = 11;      // First relay control pin
-const int RELAY_IN4 = 10;      // Second relay control pin
-const int IO_SIGNAL1 = 2;     // First I/O input from liquid handler
-const int IO_SIGNAL2 = 3;     // Second I/O input from liquid handler
+const int RELAY_IN3 = 8;      // First relay control pin
+const int RELAY_IN4 = 7;      // Second relay control pin
+const int IO_SIGNAL1 = 10;     // First I/O input from liquid handler
+const int IO_SIGNAL2 = 11;     // Second I/O input from liquid handler
 
 // Timing constants
 const int RELAY_DELAY = 50;   // Delay between relay switching to prevent shorts
