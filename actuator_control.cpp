@@ -1,6 +1,6 @@
 // Pin definitions
-const int RELAY_IN3 = 8;      // First relay control pin
-const int RELAY_IN4 = 7;      // Second relay control pin
+const int RELAY_IN1 = 8;      // First relay control pin
+const int RELAY_IN2 = 7;      // Second relay control pin
 const int IO_SIGNAL1 = 10;     // First I/O input from liquid handler
 const int IO_SIGNAL2 = 11;     // Second I/O input from liquid handler
 
@@ -9,16 +9,16 @@ const int RELAY_DELAY = 50;   // Delay between relay switching to prevent shorts
 
 void setup() {
   // Configure relay control pins as outputs
-  pinMode(RELAY_IN3, OUTPUT);
-  pinMode(RELAY_IN4, OUTPUT);
+  pinMode(RELAY_IN1, OUTPUT);
+  pinMode(RELAY_IN2, OUTPUT);
 
   // Configure I/O signal pins as inputs
   pinMode(IO_SIGNAL1, INPUT);
   pinMode(IO_SIGNAL2, INPUT);
 
   // Initialize relays to OFF state
-  digitalWrite(RELAY_IN3, HIGH);  // Relays are typically active LOW
-  digitalWrite(RELAY_IN4, HIGH);
+  digitalWrite(RELAY_IN1, HIGH);  // Relays are typically active LOW
+  digitalWrite(RELAY_IN2, HIGH);
 }
 
 void loop() {
@@ -29,26 +29,26 @@ void loop() {
   // Safety check - make sure both signals aren't active
   if (signal1 == HIGH && signal2 == HIGH) {
     // Error condition - turn everything off
-    digitalWrite(RELAY_IN3, HIGH);
-    digitalWrite(RELAY_IN4, HIGH);
+    digitalWrite(RELAY_IN1, HIGH);
+    digitalWrite(RELAY_IN2, HIGH);
     return;
   }
 
   // Direction 1 - First signal active
   if (signal1 == HIGH && signal2 == LOW) {
-    digitalWrite(RELAY_IN4, HIGH);  // Make sure other relay is off first
+    digitalWrite(RELAY_IN2, HIGH);  // Make sure other relay is off first
     delay(RELAY_DELAY);            // Brief delay to prevent shorts
-    digitalWrite(RELAY_IN3, LOW);   // Activate first relay
+    digitalWrite(RELAY_IN1, LOW);   // Activate first relay
   }
   // Direction 2 - Second signal active
   else if (signal2 == HIGH && signal1 == LOW) {
-    digitalWrite(RELAY_IN3, HIGH);  // Make sure other relay is off first
+    digitalWrite(RELAY_IN1, HIGH);  // Make sure other relay is off first
     delay(RELAY_DELAY);            // Brief delay to prevent shorts
-    digitalWrite(RELAY_IN4, LOW);   // Activate second relay
+    digitalWrite(RELAY_IN2, LOW);   // Activate second relay
   }
   // No signals active - stop movement
   else {
-    digitalWrite(RELAY_IN3, HIGH);
-    digitalWrite(RELAY_IN4, HIGH);
+    digitalWrite(RELAY_IN1, HIGH);
+    digitalWrite(RELAY_IN2, HIGH);
   }
 }
